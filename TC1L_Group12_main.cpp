@@ -2,12 +2,13 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
-#include <windows.h>
+#include <windows.h> //prosess accesss
+#include <limits>  //limit input
 
 using namespace std;
 
 void writeSheet(string filename) {
-    string ids[10];
+    int ids[10];
     string names[20];
     string status[10];
     int count = 0;
@@ -16,7 +17,7 @@ void writeSheet(string filename) {
         cout << "How many students do you want to add? (Max 10): ";
         if (!(cin >> count)) {
             cin.clear();
-            cin.ignore(10000, '\n'); //debug dont delete idk why but it work
+            cin.ignore(10000, '\n');
             count = 11;
         } else {
             if (count > 10) {
@@ -25,43 +26,43 @@ void writeSheet(string filename) {
         }
     } while (count > 10 || count <= 0);
 
-    cin.ignore(); //debug for leak input
+    cin.ignore();
 
-// student number output as Student "n"
     for (int i = 0; i < count; i++) {
         cout << "----------------------" << endl;
         cout << "Student " << i + 1 << endl;
 
-        // ID input null checker
-        do {
-            cout << "Enter ID (Number): ";
-            getline(cin, ids[i]);
-            if (ids[i].empty()) {
-                cout << "Input cannot be empty. Please try again." << endl;
+        while (true) {
+            cout << "Enter StudentID: ";
+            if (cin >> ids[i]) {
+                cin.ignore();
+                break;
+            } else {
+                cout << "Error: Invalid INT value. Please enter a number." << endl; //input checking message
+                cin.clear();
+                cin.ignore(10000, '\n');  //minor fix
             }
-        } while (ids[i].empty());
+        }
 
-        // Name input null checker
         do {
             cout << "Enter Name: ";
             getline(cin, names[i]);
+            // null checker
             if (names[i].empty()) {
                 cout << "Input cannot be empty. Please try again." << endl;
             }
         } while (names[i].empty());
 
-        // Attandance input null checker
         do {
             cout << "Enter Status (Present/Absent): ";
             getline(cin, status[i]);
-            if (status[i].empty()) {
+            if (status[i].empty()) { //null checker
                 cout << "Input cannot be empty. Please try again." << endl;
             }
         } while (status[i].empty());
     }
 
-//file create function
-    ofstream file(filename.c_str());
+    ofstream file(filename.c_str()); //file create handle
     if (!file) {
         cout << "Error creating file." << endl;
     } else {
@@ -74,7 +75,6 @@ void writeSheet(string filename) {
     }
 }
 
-
 void viewSheet(string filename) {
     string line;
     ifstream file(filename.c_str());
@@ -83,8 +83,24 @@ void viewSheet(string filename) {
         cout << "Error opening file." << endl;
     } else {
         cout << "--- CSV VIEW MODE ---" << endl;
-        while (getline(file, line)) {
-            cout << line << endl;
+        getline(file, line);
+
+        cout << left << setw(10) << "ID"
+             << left << setw(20) << "Name"
+             << left << setw(10) << "Status" << endl;
+
+        string id, name, stat;
+
+        while (file.good()) {
+            getline(file, id, ',');
+            getline(file, name, ',');
+            getline(file, stat, '\n');
+
+            if(!id.empty()) {
+                 cout << left << setw(10) << id
+                      << left << setw(20) << name
+                      << left << setw(10) << stat << endl;
+            }
         }
         file.close();
     }
@@ -103,7 +119,6 @@ int main() {
     cout << "Enter attendance sheet name: ";
     getline(cin, sheet_name);
 
-    // input null checker
     while (sheet_name.empty()) {
         cout << "Input cannot be empty. Enter attendance sheet name: ";
         getline(cin, sheet_name);
