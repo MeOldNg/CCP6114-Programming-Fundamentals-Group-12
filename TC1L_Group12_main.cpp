@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <windows.h>
@@ -15,7 +16,7 @@ void writeSheet(string filename) {
         cout << "How many students do you want to add? (Max 10): ";
         if (!(cin >> count)) {
             cin.clear();
-            cin.ignore(10000, '\n'); //debug dont delete
+            cin.ignore(10000, '\n'); //debug dont delete idk why but it work
             count = 11;
         } else {
             if (count > 10) {
