@@ -33,7 +33,7 @@ void writeSheet(string filename) {
         cout << "Student " << i + 1 << endl;
 
         while (true) {
-            cout << "Enter StudentID: ";
+            cout << "Enter StudentID (Max 10 Digits): ";
             if (cin >> ids[i]) {
                 cin.ignore();
                 break;
