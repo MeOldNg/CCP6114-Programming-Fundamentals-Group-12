@@ -1,3 +1,21 @@
+// *********************************************************
+// Program: TC1L_Group12_main.cpp
+// Course: CCP6114 Programming Fundamentals
+// Lecture Class: TC1L
+// Tutorial Class: TT1L
+// Trimester: 2530
+// Member_1: 252UC24001 | Zul Fadhli Bin Zaiman | ZUL.FADHLI.ZAIMAN1@student.mmu.edu.my | 01133310455
+// Member_2: 252UC24071 | NG JUN WEI | NG.JUN.WEI1@student.mmu.edu.my | 0182994163
+// Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 0142122488
+// Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
+// *********************************************************
+// Task Distribution
+// Member_1:Partial Documentation
+// Member_2:Coder
+// Member_3:flowchart 
+// Member_4:Coder
+// *********************************************************
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
