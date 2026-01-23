@@ -1,3 +1,21 @@
+// *********************************************************
+// Program: TC1L_Group12_main.cpp
+// Course: CCP6114 Programming Fundamentals
+// Lecture Class: TC1L
+// Tutorial Class: TT1L
+// Trimester: 2530
+// Member_1: 252UC24001 | Zul Fadhli Bin Zaiman | ZUL.FADHLI.ZAIMAN1@student.mmu.edu.my | 01133310455
+// Member_2: 252UC24071 | NG JUN WEI | NG.JUN.WEI1@student.mmu.edu.my | 0182994163
+// Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 0142122488
+// Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
+// *********************************************************
+// Task Distribution
+// Member_1:Partial Documentation
+// Member_2:Coder
+// Member_3:flowchart 
+// Member_4:Coder
+// *********************************************************
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -6,6 +24,16 @@
 #include <limits>  //limit input
 
 using namespace std;
+
+
+void term(string term_name) {
+    cout << "Create School Term (Database)" << endl;
+    cout << "----------------------" << endl;
+    cout << "Enter term name: " << endl;
+    cin >> term_name;
+    cout << "Database \"" << term_name << "\" created and loaded. " << endl << "Reading attendance data from file..." << endl;
+
+}
 
 void writeSheet(string filename) {
     int ids[10];
@@ -109,22 +137,36 @@ void viewSheet(string filename) {
 int main() {
     SetConsoleOutputCP(65001);
 
+    string term_name;
     string sheet_name;
     string filename;
+    string sheet_option;
 
     cout << "=============================================" << endl;
-    cout << " STUDENT ATTENDANCE TRACKER - MILESTONE 1" << endl;
+    cout << " STUDENT ATTENDANCE TRACKER - MILESTONE 2" << endl;
     cout << "=============================================" << endl;
 
-    cout << "Enter attendance sheet name: ";
-    getline(cin, sheet_name);
+    term(term_name);
 
-    while (sheet_name.empty()) {
-        cout << "Input cannot be empty. Enter attendance sheet name: ";
+    cout << "Create or Load: " << endl;
+    cin >> sheet_option;
+    if (sheet_option == "create") {
+        cout << "Enter attendance sheet name: ";
         getline(cin, sheet_name);
-    }
+
+        while (sheet_name.empty()) {
+            cout << "Input cannot be empty. Enter attendance sheet name: ";
+            getline(cin, sheet_name);
+        }
 
     filename = sheet_name + ".csv";
+    viewSheet(filename);
+    }
+    else {
+        viewSheet(filename);
+    }
+
+    
 
     writeSheet(filename);
     viewSheet(filename);
