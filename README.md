@@ -25,7 +25,7 @@ A C++ console-based application designed to track student attendance. This progr
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YourUsername/YourRepo.git](https://github.com/YourUsername/YourRepo.git)
+    git clone https://github.com/MeOldNg/CCP6114-Programming-Fundamentals-Group-12
     ```
 
 2.  **Compile the code:**
