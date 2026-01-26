@@ -22,6 +22,8 @@
 #include <string>
 #include <windows.h> //prosess accesss
 #include <limits>  //limit input
+#include <sstream>
+
 
 using namespace std;
 
@@ -134,6 +136,67 @@ void viewSheet(string filename) {
     }
 }
 
+void deleteStudent(string filename) {
+    ifstream file(filename.c_str());
+
+    if (!file) {
+        cout << "Error opening file." << endl;
+        return;
+    }
+
+    int deleteID;
+
+    cout << "Enter Student ID to delete: ";
+    cin >> deleteID;
+
+    ofstream temp(filename.c_str(), ios::app);
+
+    if (!temp) {
+        cout << "Error creating temp file." << endl;
+        file.close();
+        return;
+    }
+
+    string line;
+    bool found = false;
+
+    
+    getline(file, line);
+    temp << line << endl;
+
+    
+    while (getline(file, line)) {
+        string id, name, status;
+        stringstream ss(line);
+
+        getline(ss, id, ',');
+        getline(ss, name, ',');
+        getline(ss, status);
+
+        if (stoi(id) == deleteID) {
+            found = true; 
+            continue;
+        }
+
+        temp << id << "," << name << "," << status << endl;
+    }
+
+    file.close();
+    temp.close();
+
+    remove(filename.c_str());
+    rename(filename, filename.c_str());
+
+    if (found) {
+        cout << "Student ID " << deleteID << " deleted successfully." << endl;
+    } else {
+        cout << "Student ID not found." << endl;
+    }
+}
+
+
+
+
 int main() {
     SetConsoleOutputCP(65001);
 
@@ -170,6 +233,18 @@ int main() {
 
     writeSheet(filename);
     viewSheet(filename);
+
+    char choice;
+        cout << "Do you want to delete a student? (y/n): ";
+        cin >> choice;
+
+    if (choice == 'y' || choice == 'Y') {
+        deleteStudent(filename);
+        viewSheet(filename);             // show updated list
+    }
+
+
+
 
     return 0;
 }
