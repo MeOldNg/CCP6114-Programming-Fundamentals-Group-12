@@ -10,9 +10,9 @@
 // Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
 // *********************************************************
 // Task Distribution
-// Member_1:Partial Documentation
-// Member_2:Coder
-// Member_3:flowchart 
+// Member_1:Coder, Partial Documentation
+// Member_2:Coder, Documentation
+// Member_3:Flowchart 
 // Member_4:Coder
 // *********************************************************
 
@@ -23,10 +23,7 @@
 #include <windows.h> //prosess accesss
 #include <limits>  //limit input
 #include <sstream>
-
-
 using namespace std;
-
 
 void term(string term_name) {
     cout << "Create School Term (Database)" << endl;
@@ -34,7 +31,6 @@ void term(string term_name) {
     cout << "Enter term name: " << endl;
     cin >> term_name;
     cout << "Database \"" << term_name << "\" created and loaded. " << endl << "Reading attendance data from file..." << endl;
-
 }
 
 void writeSheet(string filename) {
@@ -149,7 +145,7 @@ void deleteStudent(string filename) {
     cout << "Enter Student ID to delete: ";
     cin >> deleteID;
 
-    ofstream temp(filename.c_str(), ios::app);
+    ofstream temp("temp.txt", ios::app);
 
     if (!temp) {
         cout << "Error creating temp file." << endl;
@@ -185,7 +181,7 @@ void deleteStudent(string filename) {
     temp.close();
 
     remove(filename.c_str());
-    rename(filename, filename.c_str());
+    rename("temp.txt", filename.c_str());
 
     if (found) {
         cout << "Student ID " << deleteID << " deleted successfully." << endl;
@@ -194,8 +190,23 @@ void deleteStudent(string filename) {
     }
 }
 
-
-
+void deletestudentchoice(string filename) {
+    char choice;
+    cout << "Do you want to delete a student? (y/n): ";
+    cin >> choice;
+    if (choice == 'y' || choice == 'Y') {
+            deleteStudent(filename);
+            viewSheet(filename);             // show updated list
+            deletestudentchoice(filename);
+    }
+    else if (choice == 'n' || choice == 'N') {
+        viewSheet(filename);
+        exit(0);
+    }
+    else
+        cout << "The input is not valid, please try again!" << endl;
+        deletestudentchoice(filename); 
+    }
 
 int main() {
     SetConsoleOutputCP(65001);
@@ -204,6 +215,7 @@ int main() {
     string sheet_name;
     string filename;
     string sheet_option;
+    char choice;
 
     cout << "=============================================" << endl;
     cout << " STUDENT ATTENDANCE TRACKER - MILESTONE 2" << endl;
@@ -222,29 +234,17 @@ int main() {
             getline(cin, sheet_name);
         }
 
-    filename = sheet_name + ".csv";
-    viewSheet(filename);
+        filename = sheet_name + ".csv";
+        writeSheet(filename);
+        viewSheet(filename);
+        deletestudentchoice(filename);
     }
     else {
+        cout << "Enter the filename you want to load: " << endl;
+        getline(cin, sheet_name);
+        filename = sheet_name + ".csv";
         viewSheet(filename);
     }
 
-    
-
-    writeSheet(filename);
-    viewSheet(filename);
-
-    char choice;
-        cout << "Do you want to delete a student? (y/n): ";
-        cin >> choice;
-
-    if (choice == 'y' || choice == 'Y') {
-        deleteStudent(filename);
-        viewSheet(filename);             // show updated list
-    }
-
-
-
-
     return 0;
-}
+    }
