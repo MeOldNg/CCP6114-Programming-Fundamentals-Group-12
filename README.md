@@ -1,4 +1,4 @@
-# Student Attendance Tracker - Milestone 1
+# Student Attendance Tracker - Milestone 2
 
 A C++ console-based application designed to track student attendance. This program allows users to create attendance sheets, input student data (ID, Name, Status), and save the information directly to a CSV file for easy viewing in Excel or spreadsheet software.
 
