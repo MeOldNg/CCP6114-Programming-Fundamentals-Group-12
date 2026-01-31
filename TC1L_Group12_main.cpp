@@ -1,36 +1,35 @@
-    // *********************************************************
-    // Program: TC1L_Group12_main.cpp
-    // Course: CCP6114 Programming Fundamentals
-    // Lecture Class: TC1L
-    // Tutorial Class: TT1L
-    // Trimester: 2530
-    // Member_1: 252UC24001 | Zul Fadhli Bin Zaiman | ZUL.FADHLI.ZAIMAN1@student.mmu.edu.my | 01133310455
-    // Member_2: 252UC24071 | NG JUN WEI | NG.JUN.WEI1@student.mmu.edu.my | 0182994163
-    // Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 0142122488
-    // Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
-    // *********************************************************
-    // Task Distribution
-    // Member_1:Coder, Partial Documentation
-    // Member_2:Coder, Documentation
-    // Member_3:Flowchart
-    // Member_4:Coder
-    // *********************************************************
+// *********************************************************
+// Program: TC1L_Group12_main.cpp
+// Course: CCP6114 Programming Fundamentals
+// Lecture Class: TC1L
+// Tutorial Class: TT1L
+// Trimester: 2530
+// Member_1: 252UC24001 | Zul Fadhli Bin Zaiman | ZUL.FADHLI.ZAIMAN1@student.mmu.edu.my | 01133310455
+// Member_2: 252UC24071 | NG JUN WEI | NG.JUN.WEI1@student.mmu.edu.my | 0182994163
+// Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 0142122488
+// Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
+// *********************************************************
+// Task Distribution
+// Member_1:Coder, Partial Documentation
+// Member_2:Coder, Documentation
+// Member_3:Flowchart
+// Member_4:Coder
+// *********************************************************
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+#include <windows.h> //prosess accesss
+#include <limits>  //limit input
+#include <sstream>
+using namespace std;
 
-    #include <iostream>
-    #include <iomanip>
-    #include <fstream>
-    #include <string>
-    #include <windows.h> //prosess accesss
-    #include <limits>  //limit input
-    #include <sstream>
-    using namespace std;
-
-    void term(string term_name) {
-        cout << "Create School Term (Database)" << endl;
-        cout << "----------------------" << endl;
-        cout << "Enter term name: " << endl;
-        cin >> term_name;
-        cout << "Database \"" << term_name << "\" created and loaded. " << endl << "Reading attendance data from file..." << endl;
+void term(string term_name) {
+    cout << "Create School Term (Database)" << endl;
+    cout << "----------------------" << endl;
+    cout << "Enter term name: " << endl;
+    cin >> term_name;
+    cout << "Database \"" << term_name << "\" created and loaded. " << endl << "Reading attendance data from file..." << endl;
     }
 
 
@@ -349,7 +348,7 @@ void advancedErrorUpdate(string filename) {
     cout << "Create or Load: ";
     cin >> sheet_option;
 
-    if (sheet_option == "create") {
+    if (sheet_option == "create" || "Create" || "CREATE") {
         cout << "Enter attendance sheet name: ";
         cin.ignore(); // Need to clear the buffer before reading a string with spaces
         getline(cin, sheet_name);
