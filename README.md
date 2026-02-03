@@ -68,16 +68,21 @@ ID,Name,Status
 
 ## Flowchart
 
+### Milestone 1
+
 <img width="819" height="1762" alt="CCP6114_Flowchart_G12 drawio" src="https://github.com/user-attachments/assets/dd50239d-ebe8-4183-9fe6-01b505ae1d2c" />
+
+# Milestone 2 
+
+
 
 ## Pseudocode
 
+### Milestone 1
 ```
 STARTUP (main)
 
     START
-
-    Set system encoding to UTF-8 (65001).
 
     DISPLAY "STUDENT ATTENDANCE TRACKER - MILESTONE 1".
 
@@ -199,3 +204,7 @@ FUNCTION: viewSheet(filename)
         
 END OF MILESTONE 1
 ```
+
+### Milestone 2 
+
+
