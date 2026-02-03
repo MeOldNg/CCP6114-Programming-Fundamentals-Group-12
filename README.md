@@ -1,4 +1,4 @@
-# Student Attendance Tracker - Milestone 1
+# Student Attendance Tracker - Milestone 2
 
 A C++ console-based application designed to track student attendance. This program allows users to create attendance sheets, input student data (ID, Name, Status), and save the information directly to a CSV file for easy viewing in Excel or spreadsheet software.
 
@@ -25,7 +25,7 @@ A C++ console-based application designed to track student attendance. This progr
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YourUsername/YourRepo.git](https://github.com/YourUsername/YourRepo.git)
+    git clone https://github.com/MeOldNg/CCP6114-Programming-Fundamentals-Group-12
     ```
 
 2.  **Compile the code:**
