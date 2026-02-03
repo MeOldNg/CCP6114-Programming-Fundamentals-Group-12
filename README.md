@@ -68,16 +68,21 @@ ID,Name,Status
 
 ## Flowchart
 
+### Milestone 1
+
 <img width="819" height="1762" alt="CCP6114_Flowchart_G12 drawio" src="https://github.com/user-attachments/assets/dd50239d-ebe8-4183-9fe6-01b505ae1d2c" />
+
+# Milestone 2 
+
+<img width="1413" height="3332" alt="CCP6114_Flowchart_G12_Milestone2 drawio" src="https://github.com/user-attachments/assets/1bccbdd7-af51-4306-8dd8-f740d7e4e1d4" />
 
 ## Pseudocode
 
+### Milestone 1
 ```
 STARTUP (main)
 
     START
-
-    Set system encoding to UTF-8 (65001).
 
     DISPLAY "STUDENT ATTENDANCE TRACKER - MILESTONE 1".
 
@@ -168,7 +173,7 @@ FUNCTION: writeSheet(filename)
         DISPLAY "Data saved to [filename]".
 
 FUNCTION: viewSheet(filename)
-
+      
     OPEN file named filename for reading.
 
     IF file open fails:
@@ -199,3 +204,128 @@ FUNCTION: viewSheet(filename)
         
 END OF MILESTONE 1
 ```
+
+### Milestone 2 
+
+```
+STARTUP (main)
+
+   DISPLAY "STUDENT ATTENDANCE TRACKER - MILESTONE 2"
+
+   PROMPT user to enter Attendance Sheet Name
+
+   INPUT sheet_name
+
+   WHILE sheet_name is empty
+       DISPLAY "Input cannot be empty"
+       INPUT sheet_name
+   END WHILE
+
+   SET filename ← sheet_name + ".csv"
+
+   CALL writeSheet(filename)
+
+   CALL viewSheet(filename)
+
+   CALL updateStudent(filename)
+
+   CALL deleteStudentChoice(filename)
+
+   CALL countRows(filename)
+
+   ELSE:
+      PROMPT user to enter filename to load
+      INPUT sheet_name
+      SET filename ← sheet_name + ".csv"
+
+      CALL viewSheet(filename)
+
+      CALL advancedErrorUpdate(filename)
+
+      CALL viewSheet(filename)
+
+      CALL deleteStudentChoice(filename)
+
+      CALL countRows(filename)
+
+FUNCTION: term()
+
+   DISPLAY "Create School Term"
+
+   PROMPT user to enter the term name
+
+   INPUT term_name
+
+   DISPLAY "Database created and loaded"
+
+FUNCTION: countRows(filename)
+
+   OPEN file
+
+   SKIP header row
+
+   COUNT number of student records
+
+   DISPLAY total number of students
+
+   CLOSE file
+
+FUNCTION: advancedErrorUpdate(filename)
+
+   DO
+      PROMPT "Enter Student ID to update"
+
+      INPUT updateID
+
+   WHILE updateID is invalid OR not found
+
+   PROMPT "Enter new status"
+
+   INPUT newStatus
+
+   UPDATE selected student record in file
+
+   DISPLAY "Row updated successfully"
+
+FUNCTION: deleteStudentChoice(filename)
+
+   PROMPT "Do you want to delete a student? (y/n)"
+
+   INPUT choice
+
+   IF choice = 'y'
+      CALL deleteStudent(filename)
+
+      CALL viewSheet(filename)
+
+      CALL deleteStudentChoice(filename)
+
+   ELSE IF choice = 'n'
+
+      CALL viewSheet(filename)
+
+   ELSE:
+
+      DISPLAY "Invalid input"
+
+      CALL deleteStudentChoice(filename)
+
+FUNCTION: deleteStudent(filename)
+
+   PROMPT "Enter Student ID to delete"
+
+   INPUT deleteID
+
+   REMOVE student record from file
+
+   IF student found
+
+      DISPLAY "Student deleted successfully"
+
+   ELSE
+
+      DISPLAY "Student ID not found"
+
+
+```
+
