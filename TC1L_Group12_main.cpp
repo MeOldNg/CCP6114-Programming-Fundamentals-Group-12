@@ -12,7 +12,7 @@
 // Task Distribution
 // Member_1:Coder, Partial Documentation
 // Member_2:Coder, Documentation
-// Member_3:Flowchart
+// Member_3:Tester, Flowchart, Pseuodocode
 // Member_4:Coder
 // *********************************************************
 #include <iostream>
