@@ -24,7 +24,7 @@
 #include <sstream>
 using namespace std;
 
-void term(string term_name) {
+void term(string term_name) {   // For asking the school term
     cout << "Create School Term (Database)" << endl;
     cout << "----------------------" << endl;
     cout << "Enter term name: " << endl;
@@ -63,13 +63,13 @@ void countRows(string filename) {
 
 
 
-    void writeSheet(string filename) {
+    void writeSheet(string filename) {  // Function to write data onto the user device
         int ids[10];
         string names[20];
         string status[10];
         int count = 0;
 
-        do {
+        do {    // ASk for the amount of students to add
             cout << "How many students do you want to add? (Max 10): ";
             if (!(cin >> count)) {
                 cin.clear();
@@ -100,7 +100,7 @@ void countRows(string filename) {
                 }
             }
 
-            do {
+            do {    // Get the names of the student 
                 cout << "Enter Name: ";
                 getline(cin, names[i]);
                 // null checker
@@ -131,7 +131,7 @@ void countRows(string filename) {
         }
     }
 
-    void viewSheet(string filename) {
+    void viewSheet(string filename) {   // Function to view the file inside the user device
         string line;
         ifstream file(filename.c_str());
 
@@ -162,7 +162,7 @@ void countRows(string filename) {
         }
     }
 
-void advancedErrorUpdate(string filename) {
+void advancedErrorUpdate(string filename) { // Advanced error handling also for inputing the updates
     cout << endl;
     cout << "------------------------------------------" << endl;
     cout << "Advanced Error Handling" << endl;
@@ -199,7 +199,7 @@ void advancedErrorUpdate(string filename) {
             }
             checkFile.close();
 
-            if (exists) {
+            if (exists) {   // Error handling
                 validID = true;
             } else {
                 cout << "Error: StudentID does not exist." << endl;
@@ -247,16 +247,16 @@ void advancedErrorUpdate(string filename) {
 
     // output
     remove(filename.c_str());
-    rename("updated.csv", filename.c_str());
+    rename("updated.csv", filename.c_str());    // Rename the file to its original name
 }
 
 
 
-    void deleteStudent(string filename) {
+    void deleteStudent(string filename) {   // Function to delete student Id from the database
         ifstream file(filename.c_str());
 
         if (!file) {
-            cout << "Error opening file." << endl;
+            cout << "Error opening file." << endl;  // Error handling
             return;
         }
 
@@ -265,10 +265,10 @@ void advancedErrorUpdate(string filename) {
         cout << "Enter Student ID to delete: ";
         cin >> deleteID;
 
-        ofstream temp("temp.txt", ios::app);
+        ofstream temp("temp.txt", ios::app);    // Create a temp file 
 
         if (!temp) {
-            cout << "Error creating temp file." << endl;
+            cout << "Error creating temp file." << endl;    // If the temp file creation failed it will close the program
             file.close();
             return;
         }
@@ -303,7 +303,7 @@ void advancedErrorUpdate(string filename) {
         remove(filename.c_str());
         rename("temp.txt", filename.c_str());
 
-        if (found) {
+        if (found) {    // check for the validity of the id inside the file
             cout << "Student ID " << deleteID << " deleted successfully." << endl;
         } else {
             cout << "Student ID not found." << endl;
@@ -311,7 +311,7 @@ void advancedErrorUpdate(string filename) {
     }
 
 
-    void deletestudentchoice(string filename) {
+    void deletestudentchoice(string filename) { // Function to connect the deletestudentchoice to main and for looping 
     char choice;
     cout << "Do you want to delete a student? (y/n): ";
     cin >> choice;
@@ -325,7 +325,7 @@ void advancedErrorUpdate(string filename) {
         // [CHANGED] Removed exit(0) so the program can continue to countRows
     }
     else {
-        cout << "The input is not valid, please try again!" << endl;
+        cout << "The input is not valid, please try again!" << endl;    // If the input is invalid it will ask the user to try again
         deletestudentchoice(filename);
     }
 }
@@ -343,17 +343,18 @@ void advancedErrorUpdate(string filename) {
     cout << " STUDENT ATTENDANCE TRACKER - MILESTONE 2" << endl;
     cout << "=============================================" << endl;
 
-    term(term_name);
+    term(term_name); // Connects to term_name function
 
+    // Ask the user for creating or loading
     cout << "Create or Load: ";
     cin >> sheet_option;
 
-    if (sheet_option == "create" || "Create" || "CREATE") {
+    if (sheet_option == "create" || sheet_option == "Create" || sheet_option == "CREATE") { // Check for user input if they want to create or laod a file
         cout << "Enter attendance sheet name: ";
         cin.ignore(); // Need to clear the buffer before reading a string with spaces
         getline(cin, sheet_name);
 
-        while (sheet_name.empty()) {
+        while (sheet_name.empty()) {    // Check for if the input is empty or not
             cout << "Input cannot be empty. Enter attendance sheet name: ";
             getline(cin, sheet_name);
         }
@@ -372,7 +373,7 @@ void advancedErrorUpdate(string filename) {
         // Call the new count function
         countRows(filename);
     }
-    else {
+    else {  // For loading the files 
         cout << "Enter the filename you want to load (without .csv): ";
         cin.ignore();
         getline(cin, sheet_name);
