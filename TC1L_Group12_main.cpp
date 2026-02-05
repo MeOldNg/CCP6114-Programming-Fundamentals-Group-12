@@ -6,15 +6,16 @@
 // Trimester: 2530
 // Member_1: 252UC24001 | Zul Fadhli Bin Zaiman | ZUL.FADHLI.ZAIMAN1@student.mmu.edu.my | 01133310455
 // Member_2: 252UC24071 | NG JUN WEI | NG.JUN.WEI1@student.mmu.edu.my | 0182994163
-// Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 0142122488
+// Member_3: 252UC2551C | SHAZARUL MUHAMMAD HAFIZ BIN SHAARI | SHAZARUL.MUHAMMAD.HAFIZ@student.mmu.edu.my | 01421224888
 // Member_4: 252UC243K7 | WOON YU HERN | WOON.YU.HERN1@student.mmu.edu.my | 0109376813
 // *********************************************************
 // Task Distribution
-// Member_1:Coder, Partial Documentation
-// Member_2:Coder, Documentation
-// Member_3:Flowchart
-// Member_4:Coder
+// Member_1: Software Developer & Technical Writer (Coding & Partial Post-Documentation)
+// Member_2: Project Lead & Software Engineer (Project Leadership, Coding & Documentation)
+// Member_3: Systems Analyst & Quality Assurance (Pre-production Planning & Bug Testing)
+// Member_4: Lead Software Developer (Main Logic Implementation & Coding)
 // *********************************************************
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -30,7 +31,7 @@ void term(string term_name) {
     cout << "Enter term name: " << endl;
     cin >> term_name;
     cout << "Database \"" << term_name << "\" created and loaded. " << endl << "Reading attendance data from file..." << endl;
-    }
+}
 
 
     // count student total
@@ -181,6 +182,8 @@ void advancedErrorUpdate(string filename) {
             cin.clear();
             cin.ignore(10000, '\n');
         } else {
+            if (updateID == 0) return;
+
             // Check valid
             ifstream checkFile(filename.c_str());
             string line, idCheck;
@@ -337,7 +340,7 @@ void advancedErrorUpdate(string filename) {
     string term_name;
     string sheet_name;
     string filename;
-    string sheet_option;
+    int sheet_option;
 
     cout << "=============================================" << endl;
     cout << " STUDENT ATTENDANCE TRACKER - MILESTONE 2" << endl;
@@ -345,10 +348,22 @@ void advancedErrorUpdate(string filename) {
 
     term(term_name);
 
-    cout << "Create or Load: ";
-    cin >> sheet_option;
+    while (true) {
+        cout << "Create (1) or Load (2): ";
+        if (!(cin >> sheet_option)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid input." << endl;
+        } else {
+            if (sheet_option == 1 || sheet_option == 2) {
+                break;
+            } else {
+                cout << "Invalid input." << endl;
+            }
+        }
+    }
 
-    if (sheet_option == "create" || "Create" || "CREATE") {
+    if (sheet_option == 1) {
         cout << "Enter attendance sheet name: ";
         cin.ignore(); // Need to clear the buffer before reading a string with spaces
         getline(cin, sheet_name);
@@ -377,6 +392,20 @@ void advancedErrorUpdate(string filename) {
         cin.ignore();
         getline(cin, sheet_name);
         filename = sheet_name + ".csv";
+
+        // Loop until a valid file is found
+        while (true) {
+            ifstream checkFile(filename.c_str());
+            if (checkFile) {
+                checkFile.close();
+                break;
+            } else {
+                cout << "Error opening file. Please try again." << endl;
+                cout << "Enter the filename you want to load (without .csv): ";
+                getline(cin, sheet_name);
+                filename = sheet_name + ".csv";
+            }
+        }
 
         viewSheet(filename);
 
